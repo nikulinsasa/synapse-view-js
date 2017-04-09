@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.mediator{
+  padding: 10px;
+  border:1px solid;
+  font-weight: normal;
+  width:50%;
+  margin: 10px auto;
+  min-width: 300px;
+  font-size: 12px;
+   box-sizing: border-box;
+   border-width: 2px;
+   border-radius: 2px;
+}
+
+.mediator img{
+  width:50px;
+  height:50px;
+}
+
+.mediator .mediator{
+  width:100%;
+
+}
+
+.mediator-icon{
+  width:75px;
+  margin: auto;
+  padding: 5px 0;
+  box-shadow: 0 0 1px 1px black;
+}
+
+.mediator-label{
+  font-weight: bold;
+}
+
+.mediator-property{
+  background: #ccccff;
+  border-color: #86869e;
+}
+
+.mediator-log{
+  background: #ffff57;
+  border-color: #c1c100;
+}
+
+.mediator-call,.mediator-send{
+  background: #60ea60;
+  border-color: #228e22;
+}
