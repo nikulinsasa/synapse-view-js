@@ -13,11 +13,14 @@ class LogMediator extends Component {
     var properties = [];
 
     if(typeof this.props.properties !== "undefined"){
+
       for(var i=0;i<this.props.properties.length;i++){
-        console.log(this.props.properties[i]);
-        properties.push(<PropertyMediator key={index} name={this.props.properties[i].name} value={this.props.properties[i].value} />);
+        var _propertyIndex = index+"property"+i;
+        var value = this.props.properties[i].$.value !== undefined ? this.props.properties[i].$.value : this.props.properties[i].$.expression;
+        properties.push(<PropertyMediator key={_propertyIndex} name={this.props.properties[i].$.name} value={value} />);
       }
     }
+    console.log(properties);
 
     return (
       <div className="mediator mediator-log">
