@@ -32,7 +32,7 @@ class Sequence extends Component {
     return (
       <div className="mediator mediator-sequence">
         <div className="mediator-icon">
-          <img src={"icons/sequence.svg"} alt="sequence" />
+          <img src={"/icons/sequence.svg"} alt="sequence" />
           <div className="mediator-label">{this.props.type}</div>
         </div>
         <div className="mediator-name">{sequenceName}</div>

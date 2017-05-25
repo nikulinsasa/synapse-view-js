@@ -12,7 +12,7 @@ class SendMediator extends Component {
     return (
       <div className="mediator mediator-send">
         <div className="mediator-icon">
-          <img src={"icons/send.svg"} alt="sequence" />
+          <img src={"/icons/send.svg"} alt="sequence" />
           <div className="mediator-label">send</div>
         </div>
         <div className="meidator-poropties">

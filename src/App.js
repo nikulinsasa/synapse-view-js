@@ -1,95 +1,89 @@
 import React, { Component } from 'react';
 
-import MediatorFactory from './Synapse/MediatorFactory';
+import ShowElement from './Controllers/ShowElement';
+import ListElements from './Controllers/ListElements';
+import Login from './Controllers/Login';
+import { getCookie, deleteCookie } from './SelfCookies';
 import './App.css';
 
 class App extends Component {
 
-  testValueXml() {
-    return "<proxy name=\"StockQuoteProxy2\"><target><inSequence><property name=\"preserveProcessedHeaders\" value=\"true\"/><sequence key=\"main\"><in><property name=\"direction\" value=\"incoming\"/><sequence key=\"stockquote\"><log level=\"custom\"><property name=\"Text\" value=\"Sending quote request\"/><property expression=\"get-property('version')\" name=\"version\"/><property expression=\"get-property('direction')\" name=\"direction\"/></log><send><endpoint key=\"simple\"/></send></sequence></in><out><send/></out></sequence></inSequence><outSequence><send/></outSequence></target><publishWSDL uri=\"file:repository/conf/sample/resources/proxy/sample_proxy_1.wsdl\"/></proxy>";
+  constructor(props) {
+    super(props);
+    this.state = {
+      text: "wait"
+    }
   }
 
-  testValue(){
-      return [
-      {
-        type:"sequence",
-        sequences:[
-          {
-            type:"property",
-            name:"lala",
-            value:"la"
-          },
-          {
-            type:"property",
-            name:"lala",
-            value:"la"
-          },
-          {
-            type:"log",
-            properties:[
-              {
-                type:"property",
-                name:"lala",
-                value:"expretion=$body"
-              }
-            ]
-          },
-          {
-            type:"sequence",
-            sequences:[
-              {
-                type:"property",
-                name:"lala",
-                value:"la"
-              },
-              {
-                type:"property",
-                name:"lala",
-                value:"la"
-              },
-              {
-                type:"log",
-                properties:[
-                  {
-                    type:"property",
-                    name:"lala",
-                    value:"expretion=$body"
-                  }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "type":"send"
-      }
-    ];
-    }
+  getInitialState() {
+    return {
+      "text":"hello"
+    };
+  }
 
+  loadListProxy() {
+    var _this = this;
+    var _axios = require('axios');
+    _axios.get("http://localhost:9998/element/list/proxy",{
+      headers:{ Authorization: getCookie("auth_token") }
+    })
+    .then(function (response) {
+      _this.setState({text:<ListElements list={response.data.names} type="proxy" />});
+    })
+    .catch(function (error) {
+      _this.setState({text:error.response.data});
+      if(error.response.status===401){
+        _this.setState({text:(<Login app={_this} />)});
+      }
+    });
+  }
+
+  loadSynapseElement(element) {
+    var _this = this;
+    var _axios = require('axios');
+    _axios.get("http://localhost:9998/element/"+element,{
+      headers:{ Authorization: getCookie("auth_token") }
+    })
+    .then(function (response) {
+      console.log(response);
+      // _this.setState({text:(<div>Разработка</div>)});
+      _this.setState({text:<ShowElement xml={response.data} />});
+    })
+    .catch(function (error) {
+      _this.setState({text:error.response.data});
+      if(error.response.status===401){
+        _this.setState({text:(<Login app={_this} />)});
+      }
+    });
+  }
+
+  componentDidMount() {
+    var pathname = window.location.pathname;
+    console.log(pathname);
+    if(window.location.pathname==="/"){
+      this.loadListProxy();
+    }else if(/^\/element\/[0-9A-Za-z]+$/.test(pathname)){
+      this.loadSynapseElement(pathname.replace("\/element\/",""));
+      // console.log();
+    }else if(pathname==="/logout"){
+      deleteCookie("auth_token");
+      deleteCookie("auth_refresh_token");
+      this.setState({text:(<Login app={this} />)});
+    }
+  }
 
   render() {
 
-    var _sequences = this.testValue();
-    var _mediatorElements = [];
+    console.log(window.location.pathname);
 
-    var parseString = require('react-native-xml2js').parseString;
-    parseString(this.testValueXml(), function (err, result) {
-        var i=0;
-        for(var key in result){
-          _mediatorElements.push(<MediatorFactory key={i} index={i} type={key} values={result[key]} />);
-          var keyArrow = key+"_arrow_main";
-          _mediatorElements.push(<div key={keyArrow}>&#x2193;</div>);
-          i++;
-        }
-    });
+    console.log(this.text);
     return (
       <div className="App">
         <div className="App-header">
           <h2>Струтура</h2>
         </div>
         <div className="App-intro">
-          {_mediatorElements}
+          {this.state.text}
         </div>
       </div>
     );

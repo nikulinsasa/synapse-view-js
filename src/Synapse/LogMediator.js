@@ -25,7 +25,7 @@ class LogMediator extends Component {
     return (
       <div className="mediator mediator-log">
         <div className="mediator-icon">
-          <img src={"icons/log.svg"} alt="sequence" />
+          <img src={"/icons/log.svg"} alt="sequence" />
           <div className="mediator-label">log</div>
         </div>
         <div>{level}</div>
