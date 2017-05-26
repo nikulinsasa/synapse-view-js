@@ -57,6 +57,25 @@ class App extends Component {
     });
   }
 
+  proxyUpdate() {
+    var _this = this;
+    var _axios = require('axios');
+    _axios.get("http://localhost:9998/service/update-proxy",{
+      headers:{ Authorization: getCookie("auth_token") }
+    })
+    .then(function (response) {
+      console.log(response);
+      window.history.pushState("", "", '/');
+      _this.componentDidMount();
+    })
+    .catch(function (error) {
+      _this.setState({text:error.response.data});
+      if(error.response.status===401){
+        _this.setState({text:(<Login app={_this} />)});
+      }
+    });
+  }
+
   componentDidMount() {
     var pathname = window.location.pathname;
     console.log(pathname);
@@ -69,6 +88,8 @@ class App extends Component {
       deleteCookie("auth_token");
       deleteCookie("auth_refresh_token");
       this.setState({text:(<Login app={this} />)});
+    }else if(pathname==="/update-proxy"){
+      this.proxyUpdate();
     }
   }
 

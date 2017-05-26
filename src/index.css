@@ -4,11 +4,24 @@ body {
   font-family: sans-serif;
 }
 
+pre{
+  text-align: justify;
+  background: #dcdcdc;
+  border:2px solid gray;
+  padding: 1em;
+  margin: 5px;
+  border-radius: 2px;
+  overflow: scroll;
+}
+
+.element-xml{
+  display: none;
+}
+
 .mediator{
   padding: 10px;
   border:1px solid;
   font-weight: normal;
-  width:50%;
   margin: 10px auto;
   min-width: 300px;
   font-size: 12px;
@@ -35,6 +48,10 @@ body {
   box-shadow: 0 0 1px 1px black;
 }
 
+.mediator-sequence{
+  background-color: rgba(0, 120, 201, 0.1);
+}
+
 .mediator-label{
   font-weight: bold;
 }
@@ -58,4 +75,38 @@ body {
   position: absolute;
   top: 15px;
   right: 15px;
+}
+
+
+
+.mediator-filter-condition{
+  border:1px solid;
+  margin-top:1em;
+  padding: 1em;
+  background: pink;
+  font-weight: bold;
+}
+
+.mediator-filter-actions{
+  display: table;
+}
+.mediator-filter-actions-row{
+  display: table-row;
+}
+.mediator-filter-action{
+  width:50%;
+  display: table-cell;;
+  min-width: 200px;
+}
+.mediator-filter-action-arrow{
+
+  text-align: center;
+}
+
+.mediator-filter-then{
+  background: #e6ffe6;
+
+}
+.mediator-filter-else{
+  background: #ffe9e9;
 }

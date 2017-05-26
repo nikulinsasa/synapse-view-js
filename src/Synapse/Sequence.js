@@ -18,14 +18,16 @@ class Sequence extends Component {
       if(index==="$"){
         continue;
       }
-      var key=index+"_"+i;
-      try{
-        _mediatorElements.push(<MediatorFactory key={key} index={key} type={index} values={_sequences[index][0]} />);
-      }catch(e){
-        _mediatorElements.push(<DefaultMediator name="error" value={e} />);
+      for(var i=0;i<_sequences[index].length;i++){
+        var key=index+"_"+i;
+        try{
+          _mediatorElements.push(<MediatorFactory key={key} index={key} type={index} values={_sequences[index][i]} />);
+        }catch(e){
+          _mediatorElements.push(<DefaultMediator name="error" value={e} />);
+        }
+        var arrowKey = key+"_arrow";
+        _mediatorElements.push(<div key={arrowKey}>&#x2193;</div>);
       }
-      var arrowKey = key+"_arrow";
-      _mediatorElements.push(<div key={arrowKey}>&#x2193;</div>);
     }
 
 
