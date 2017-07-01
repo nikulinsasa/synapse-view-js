@@ -45,11 +45,10 @@ class App extends Component {
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
-      console.log(response);
-      // _this.setState({text:(<div>Разработка</div>)});
       _this.setState({text:<ShowElement xml={response.data} />});
     })
     .catch(function (error) {
+      console.log("ERROR",error);
       _this.setState({text:error.response.data});
       if(error.response.status===401){
         _this.setState({text:(<Login app={_this} />)});
@@ -81,7 +80,7 @@ class App extends Component {
     console.log(pathname);
     if(window.location.pathname==="/"){
       this.loadListProxy();
-    }else if(/^\/element\/[0-9A-Za-z]+$/.test(pathname)){
+    }else if(/^\/element\/[0-9A-Za-z_]+$/.test(pathname)){
       this.loadSynapseElement(pathname.replace("\/element\/",""));
       // console.log();
     }else if(pathname==="/logout"){

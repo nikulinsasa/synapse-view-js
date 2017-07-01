@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export default class ScriptMediator extends Component {
   render() {
-    
+
     return (
       <div className="mediator mediator-script">
         <div className="mediator-icon">
@@ -10,8 +10,8 @@ export default class ScriptMediator extends Component {
           <div className="mediator-label">script</div>
         </div>
         <div className="meidator-poropties">
-          <div>LANGUAGE <b>{this.props.value.$.language}</b></div>
-          <div>{this.props.value._}</div>
+          <div>LANGUAGE <b>{this.props.value.attributes.language.value}</b></div>
+          <div>{this.props.value.value}</div>
         </div>
       </div>
     );

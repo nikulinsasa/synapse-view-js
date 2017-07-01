@@ -9,9 +9,10 @@ pre{
   background: #dcdcdc;
   border:2px solid gray;
   padding: 1em;
-  margin: 5px;
   border-radius: 2px;
   overflow: scroll;
+  width:100%;
+  box-sizing: border-box;
 }
 
 .element-xml{
@@ -59,6 +60,8 @@ pre{
 .mediator-property{
   background: #ccccff;
   border-color: #86869e;
+
+  display:none;
 }
 
 .mediator-log{
@@ -89,14 +92,22 @@ pre{
 
 .mediator-filter-actions{
   display: table;
+  width:100%;
+}
+.mediator-filter{
+  overflow: scroll;
+  width:100%;
 }
 .mediator-filter-actions-row{
   display: table-row;
 }
 .mediator-filter-action{
   width:50%;
-  display: table-cell;;
-  min-width: 200px;
+  display: table-cell;
+  max-width: 700px;
+  overflow: hidden;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 .mediator-filter-action-arrow{
 
@@ -109,4 +120,9 @@ pre{
 }
 .mediator-filter-else{
   background: #ffe9e9;
+}
+
+.mediator-payload-format{
+  max-width: 300px;
+  margin: auto;
 }

@@ -4,23 +4,22 @@ import PropertyMediator from './PropertyMediator'
 class LogMediator extends Component {
 
   render() {
+    console.log("LOG",this.props);
     var index=this.key+"_"+this.props.type;
     var level = "";
-    if(typeof this.props.level !== "undefined"){
-      level = this.props.level;
+    if(typeof this.props.value.attributes.level !== "undefined"){
+      level = this.props.value.attributes.level.value;
     }
 
     var properties = [];
 
-    if(typeof this.props.properties !== "undefined"){
-
-      for(var i=0;i<this.props.properties.length;i++){
+    var _properties = this.props.value.getElementsByTagName("property");
+    for(var i=0;i<_properties.length;i++){
         var _propertyIndex = index+"property"+i;
-        var value = this.props.properties[i].$.value !== undefined ? this.props.properties[i].$.value : this.props.properties[i].$.expression;
-        properties.push(<PropertyMediator key={_propertyIndex} name={this.props.properties[i].$.name} value={value} />);
-      }
+
+        properties.push(<PropertyMediator key={_propertyIndex} value={_properties[i]} />);
     }
-    console.log(properties);
+
 
     return (
       <div className="mediator mediator-log">

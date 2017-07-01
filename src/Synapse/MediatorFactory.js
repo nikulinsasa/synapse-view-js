@@ -9,28 +9,31 @@ import ProxyMediator from './ProxyMediator'
 import ScriptMediator from './ScriptMediator'
 import FilterMediator from './FilterMediator'
 import PayloadFactoryMediator from './PayloadFactoryMediator'
+import IteratorMediator from './IteratorMediator'
+import AggregateMediator from './AggregateMediator'
+import EnrichMediator from './EnrichMediator'
 
 class MediatorFactory extends Component{
 
 
   render(){
-
+    console.log("NODE_FACTORY",this.props);
     if(typeof this.props.type === "undefined" ){
       return (<DefaultMediator name='Тип не передан' />);
     }
     // console.log("PROPS",this.props);
-    var index=this.key+"_"+this.props.type;
-
-    switch(this.props.type){
+    var index=this.props.tagName+"_"+this.props.type;
+    console.log(this.props.values.tagName);
+    switch(this.props.values.tagName){
       case "sequence":
-      case "in":
-      case "out":
-        return (<Sequence key={index} index={index} name='sequence' type={this.props.type} sequences={this.props.values} />);
+      case "inSequence":
+      case "outSequence":
+        return (<Sequence key={index} index={index} name='sequence' type={this.props.type} sequences={this.props.values.children} />);
       case "proxy":
         return (<ProxyMediator key={index} index={index} name='proxy' target={this.props.values} />);
       case "property":
       case "header":
-        return (<PropertyMediator type={this.props.type} key={index} name={this.props.values.$.name} value={this.props.values.$.value} />);
+        return (<PropertyMediator key={index} value={this.props.values} />);
       case "send":
       case "call":
           var endpoint = {};
@@ -39,13 +42,19 @@ class MediatorFactory extends Component{
           }
           return (<SendMediator type={this.props.type} key={index} endpoint={endpoint} />);
       case "log":
-          return (<LogMediator key={index} index={index} properties={this.props.values.property} />);
+          return (<LogMediator key={index} index={index} value={this.props.values} />);
       case "filter":
           return (<FilterMediator value={this.props.values} />);
       case "script":
           return (<ScriptMediator key={index} value={this.props.values} />);
       case "payloadFactory":
           return (<PayloadFactoryMediator key={index} value={this.props.values} />);
+      case "iterate":
+          return (<IteratorMediator key={index} value={this.props.values} />);
+      case "aggregate":
+          return (<AggregateMediator key={index} value={this.props.values} />);
+      case "enrich":
+          return (<EnrichMediator key={index} value={this.props.values} />);
       default:
         return (<DefaultMediator key={index} name='Неизвестный' value={this.props.type} />);
     }

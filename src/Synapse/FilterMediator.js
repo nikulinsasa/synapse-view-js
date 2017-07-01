@@ -7,27 +7,30 @@ export default class FilterMediator extends Component {
     console.log(this.props.value);
 
     var condition = " ";
-    if(typeof this.props.value.$.xpath !== "undefined"){
-      condition += this.props.value.$.xpath;
+    if(typeof this.props.value.attributes.xpath !== "undefined"){
+        condition += this.props.value.attributes.xpath.value;
     }
 
-    if(typeof this.props.value.$.source !== "undefined"){
-      condition += this.props.value.$.source;
+    if(typeof this.props.value.attributes.source !== "undefined"){
+        condition += this.props.value.attributes.source.value;
     }
-    if(typeof this.props.value.$.regex !== "undefined"){
-      condition += " "+this.props.value.$.regex;
+    if(typeof this.props.value.attributes.regex !== "undefined"){
+        condition += " "+this.props.value.attributes.regexvalue;
     }
 
     var _then = "";
-    if(this.props.value.then!==""){
-      var thenIndex = this.props.index+"_then";
-      _then = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="then" sequences={this.props.value.then[0]} />);
+
+    var thenElement = this.props.value.querySelector("then");
+    if(typeof thenElement!=="undefined"){
+        var thenIndex = this.props.index+"_then";
+        _then = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="then" sequences={thenElement.children} />);
     }
 
     var _else = "";
-    if(this.props.value.else!==""){
-      var thenIndex = this.props.index+"_ele";
-      _else = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="else" sequences={this.props.value.else[0]} />);
+    var elseElement = this.props.value.querySelector("else");
+    if(elseElement!==null){
+        var thenIndex = this.props.index+"_ele";
+        _else = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="else" sequences={elseElement.children} />);
     }
 
     return (
