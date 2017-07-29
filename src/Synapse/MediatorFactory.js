@@ -12,6 +12,7 @@ import PayloadFactoryMediator from './PayloadFactoryMediator'
 import IteratorMediator from './IteratorMediator'
 import AggregateMediator from './AggregateMediator'
 import EnrichMediator from './EnrichMediator'
+import SwitchMediator from './SwitchMediator'
 
 class MediatorFactory extends Component{
 
@@ -23,7 +24,7 @@ class MediatorFactory extends Component{
     }
     // console.log("PROPS",this.props);
     var index=this.props.tagName+"_"+this.props.type;
-    console.log(this.props.values.tagName);
+
     switch(this.props.values.tagName){
       case "sequence":
         return (<Sequence key={index} index={index} name='sequence' type={this.props.type} sequence={this.props.values} />);
@@ -59,6 +60,8 @@ class MediatorFactory extends Component{
           return (<AggregateMediator key={index} value={this.props.values} />);
       case "enrich":
           return (<EnrichMediator key={index} value={this.props.values} />);
+      case "switch":
+          return (<SwitchMediator key={index} value={this.props.values} />);
       default:
         return (<DefaultMediator key={index} name='Неизвестный' value={this.props.type} />);
     }
