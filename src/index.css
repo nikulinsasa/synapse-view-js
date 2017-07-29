@@ -4,16 +4,6 @@ body {
   font-family: sans-serif;
 }
 
-pre{
-  text-align: justify;
-  background: #dcdcdc;
-  border:2px solid gray;
-  padding: 1em;
-  border-radius: 2px;
-  overflow: scroll;
-  width:100%;
-  box-sizing: border-box;
-}
 
 .element-xml{
   display: none;
@@ -21,10 +11,8 @@ pre{
 
 .mediator{
   padding: 10px;
-  border:1px solid;
   font-weight: normal;
   margin: 10px auto;
-  min-width: 300px;
   font-size: 12px;
   position: relative;
    box-sizing: border-box;
@@ -47,82 +35,4 @@ pre{
   margin: auto;
   padding: 5px 0;
   box-shadow: 0 0 1px 1px black;
-}
-
-.mediator-sequence{
-  background-color: rgba(0, 120, 201, 0.1);
-}
-
-.mediator-label{
-  font-weight: bold;
-}
-
-.mediator-property{
-  background: #ccccff;
-  border-color: #86869e;
-
-  display:none;
-}
-
-.mediator-log{
-  background: #ffff57;
-  border-color: #c1c100;
-}
-
-.mediator-call,.mediator-send{
-  background: #60ea60;
-  border-color: #228e22;
-}
-.mediator-name{
-  text-decoration: underline;
-  position: absolute;
-  top: 15px;
-  right: 15px;
-}
-
-
-
-.mediator-filter-condition{
-  border:1px solid;
-  margin-top:1em;
-  padding: 1em;
-  background: pink;
-  font-weight: bold;
-}
-
-.mediator-filter-actions{
-  display: table;
-  width:100%;
-}
-.mediator-filter{
-  overflow: scroll;
-  width:100%;
-}
-.mediator-filter-actions-row{
-  display: table-row;
-}
-.mediator-filter-action{
-  width:50%;
-  display: table-cell;
-  max-width: 700px;
-  overflow: hidden;
-  overflow-x: scroll;
-  overflow-y: scroll;
-}
-.mediator-filter-action-arrow{
-
-  text-align: center;
-}
-
-.mediator-filter-then{
-  background: #e6ffe6;
-
-}
-.mediator-filter-else{
-  background: #ffe9e9;
-}
-
-.mediator-payload-format{
-  max-width: 300px;
-  margin: auto;
 }

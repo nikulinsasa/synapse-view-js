@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Sequence from './Sequence'
+import { Card, Icon, Image } from 'semantic-ui-react'
 
 export default class IteratorMediator extends Component {
 
@@ -8,18 +9,19 @@ export default class IteratorMediator extends Component {
         var sequence = value.querySelector("target > sequence");
         var _key = this.props.key+"_iterator";
         return (
-            <div className="mediator mediator-iterator">
-                <div className="mediator-icon">
-                    <img src={"/icons/iterator.svg"} alt="iterator" />
-                    <div className="mediator-label">iterator</div>
-                </div>
-                <div>
-                    <div>{value.attributes.expression.value}</div>
-                    <div>
-                        <Sequence key={_key} index={_key} name='sequence' type="iterator" sequences={sequence.children} />
-                    </div>
-                </div>
-            </div>
+          <Card.Group itemsPerRow={1}>
+            <Card raised='true' centered='true'>
+              <Image src='/icons/iterator.svg' centered='true' title='Итератор' alt='Итератор' />
+              <Card.Content>
+                <Card.Header>
+                   {value.attributes.expression.value}
+                </Card.Header>
+                <Card.Description>
+                  <Sequence key={_key} index={_key} name='sequence' type="iterator" sequences={sequence.children} />
+                </Card.Description>
+              </Card.Content>
+            </Card>
+          </Card.Group>
         );
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { setCookie, getCookie } from '../SelfCookies';
+import { Form, Segment, Button, Grid } from 'semantic-ui-react'
 
 class Login extends Component{
 
@@ -42,15 +43,27 @@ class Login extends Component{
   render() {
 
     return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <label for="user">Пользователь</label>
-          <input type="text" placeholder="login" name="user" />
-          <label for="password">Пароль</label>
-          <input type="password" placeholder="password" name="password" />
-          <button>Авторизация</button>
-        </form>
-      </div>
+      <Segment>
+
+        <Grid columns={3} center divided>
+          <Grid.Row>
+            <Grid.Column/>
+              <Grid.Column>
+                <h3>Авторизация</h3>
+                <Form onSubmit={this.handleSubmit}>
+                  <Form.Group  widths='equal'>
+                    <Form.Input label='Пользователь' type='text' name='user' />
+                    <Form.Input label='Пароль' type='password' name='password' />
+                  </Form.Group>
+                  <Form.Group inline>
+                    <Button primary>Авторизация</Button>
+                  </Form.Group>
+                </Form>
+              </Grid.Column>
+            <Grid.Column/>
+          </Grid.Row>
+        </Grid>
+      </Segment>
     );
   }
 }

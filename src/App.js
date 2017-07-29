@@ -5,13 +5,18 @@ import ListElements from './Controllers/ListElements';
 import Login from './Controllers/Login';
 import { getCookie, deleteCookie } from './SelfCookies';
 import './App.css';
+import { Dimmer, Loader, Image, Segment, Menu } from 'semantic-ui-react'
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      text: "wait"
+      text: (
+        <Dimmer active inverted>
+          <Loader inverted content='Загрузка' />
+        </Dimmer>
+      )
     }
   }
 
@@ -77,7 +82,6 @@ class App extends Component {
 
   componentDidMount() {
     var pathname = window.location.pathname;
-    console.log(pathname);
     if(window.location.pathname==="/"){
       this.loadListProxy();
     }else if(/^\/element\/[0-9A-Za-z_]+$/.test(pathname)){
@@ -93,16 +97,16 @@ class App extends Component {
   }
 
   render() {
-
-    console.log(window.location.pathname);
-
-    console.log(this.text);
+    const { activeItem } = this.state || {}
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Струтура</h2>
+      <div>
+        <div>
+          <h2>Синопс визуализатор</h2>
         </div>
-        <div className="App-intro">
+        <div>
+          
+        </div>
+        <div>
           {this.state.text}
         </div>
       </div>

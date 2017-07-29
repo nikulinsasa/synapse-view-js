@@ -23,7 +23,7 @@ class ShowElement extends Component {
 
     var parser = new DOMParser();
     var xmlDoc = parser.parseFromString(this.props.xml,"text/xml");
-    
+
     for(var i=0;i<xmlDoc.childNodes.length;i++){
       var key = xmlDoc.childNodes[i].tagName;
 
@@ -31,18 +31,6 @@ class ShowElement extends Component {
       var keyArrow = key+"_arrow_main";
       _mediatorElements.push(<div key={keyArrow}>&#x2193;</div>);
     }
-
-    // var parseString = require('react-native-xml2js').parseString;
-    // parseString(this.props.xml, function (err, result) {
-    //     var i=0;
-    //
-    //     for(var key in result){
-    //       _mediatorElements.push(<MediatorFactory key={i} index={i} type={key} values={result[key]} />);
-    //       var keyArrow = key+"_arrow_main";
-    //       _mediatorElements.push(<div key={keyArrow}>&#x2193;</div>);
-    //       i++;
-    //     }
-    // });
 
 
     return (

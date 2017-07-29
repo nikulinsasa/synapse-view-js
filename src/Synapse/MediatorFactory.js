@@ -26,6 +26,7 @@ class MediatorFactory extends Component{
     console.log(this.props.values.tagName);
     switch(this.props.values.tagName){
       case "sequence":
+        return (<Sequence key={index} index={index} name='sequence' type={this.props.type} sequence={this.props.values} />);
       case "inSequence":
       case "outSequence":
         return (<Sequence key={index} index={index} name='sequence' type={this.props.type} sequences={this.props.values.children} />);
@@ -36,10 +37,13 @@ class MediatorFactory extends Component{
         return (<PropertyMediator key={index} value={this.props.values} />);
       case "send":
       case "call":
+
+          var endpoints = this.props.values.getElementsByTagName('endpoint');
           var endpoint = {};
-          if(this.props.values.endpoint!==undefined){
-            endpoint = this.props.values.endpoint[0];
+          if(endpoints.length>0){
+            endpoint = endpoints.item(0);
           }
+
           return (<SendMediator type={this.props.type} key={index} endpoint={endpoint} />);
       case "log":
           return (<LogMediator key={index} index={index} value={this.props.values} />);

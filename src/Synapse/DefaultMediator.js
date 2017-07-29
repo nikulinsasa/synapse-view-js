@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
-
+import { Card } from 'semantic-ui-react'
 
 class DefaultMediator extends Component {
   render() {
-    return <div className="mediator mediator-default">
-      <div className="mediator-label">неизвестный</div>
-      <div>{this.props.name}</div>
-      <div>{this.props.value}</div>
-    </div>;
+    return <Card.Group itemsPerRow={1}>
+      <Card raised='true' centered='true'>
+        <Card.Content>
+          <Card.Header>
+             неизвестный
+          </Card.Header>
+          <Card.Description>
+            {this.props.value}
+          </Card.Description>
+        </Card.Content>
+      </Card>
+    </Card.Group>;
   }
 }
 

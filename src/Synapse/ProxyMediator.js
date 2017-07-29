@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Card, Icon, Image } from 'semantic-ui-react'
 import MediatorFactory from './MediatorFactory'
 
 class ProxyMediator extends Component {
@@ -23,16 +23,21 @@ class ProxyMediator extends Component {
     }
     var name = _target.parentNode.attributes.name.value;
     key=this.props.index+"_arrow";
-    _mediatorElements.push(<div key={key}>&#x2193;</div>);
+    // _mediatorElements.push(<div key={key}>&#x2193;</div>);
     return (
-      <div className="mediator mediator-sequence">
-        <div className="mediator-icon">
-          <img src={"/icons/proxy.svg"} alt="proxy" />
-          <div className="mediator-label">proxy</div>
-        </div>
-        <div className="mediator-name">{name}</div>
-        <div>{_mediatorElements}</div>
-      </div>
+      <Card.Group itemsPerRow={1} className='mediator'>
+        <Card raised='true' centered='true'>
+          <Image src='/icons/proxy.svg' height={75} centered='true' title={this.props.type} alt={this.props.type} />
+          <Card.Content>
+            <Card.Header>
+               {name}
+            </Card.Header>
+            <Card.Description>
+              {_mediatorElements}
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Card.Group>
     );
   }
 }

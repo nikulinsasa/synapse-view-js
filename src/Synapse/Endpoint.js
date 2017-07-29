@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-
+import { Card, Icon, Image, Segment } from 'semantic-ui-react'
 
 class Endpoint extends Component {
 
   render() {
-    var name = "";
-    if(this.props.values.$!==undefined){
-      name = this.props.values.$.key;
+    var name = "ПУСТОЙ";
+    var address="";
+
+    if(typeof this.props.values.attributes!=="undefined" && typeof this.props.values.attributes.key!=="undefined"){
+      name = this.props.values.attributes.key.value;
     }
+    console.log("endpoints",this.props.values.attributes,name);
     return (
-      <div className="mediator mediator-endpoint">
-          <div className="mediator-label">ENDPOINT</div>
-          <div className="mediator-name">name = {name}</div>
-      </div>
+      <Segment color='green'>
+        <div>{name}</div>
+        <div>{address}</div>
+      </Segment>
     );
   }
 }

@@ -1,10 +1,24 @@
 import React, { Component } from 'react';
 import Sequence from './Sequence'
+import { Grid, Card, Image, Tab } from 'semantic-ui-react'
 
 export default class FilterMediator extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      count_columns: 2,
+      yes_show: "",
+      no_show: ""
+    };
+  }
+
+  hideShowColumnYes(){
+    this.setState({count_columns:1});
+    console.log(this.getState());
+  }
+
   render() {
-    console.log(this.props.value);
 
     var condition = " ";
     if(typeof this.props.value.attributes.xpath !== "undefined"){
@@ -33,25 +47,24 @@ export default class FilterMediator extends Component {
         _else = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="else" sequences={elseElement.children} />);
     }
 
+    var panes = [
+      { menuItem: 'ИСТИНА', render: () => <Tab.Pane>{_then}</Tab.Pane> },
+      { menuItem: 'ЛОЖЬ', render: () => <Tab.Pane>{_else}</Tab.Pane> }
+    ];
+
     return (
-      <div className="mediator mediator-filter">
-        <div className="mediator-icon">
-          <img src={"/icons/filter.svg"} alt="filter" />
-          <div className="mediator-label">filter</div>
-        </div>
-        <div>
-          <div className="mediator-filter-condition"><div className="mediator-filter-condition-text">{condition}</div></div>
-          <div className="mediator-filter-actions">
-            <div className="mediator-filter-actions-row">
-              <div className="mediator-filter-action">
-                <div className="mediator-filter-action-arrow">&#x2193; YES</div><div className="mediator-filter-then">{_then}</div>
-              </div><div className="mediator-filter-action">
-                <div  className="mediator-filter-action-arrow">&#x2193; NO</div><div className="mediator-filter-else">{_else}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Card.Group itemsPerRow={1}>
+        <Card raised='true' centered='true'>
+          <Image src='/icons/filter.svg' centered='true' title={this.props.type} alt={this.props.type} />
+          <Card.Content>
+            <Card.Header>{condition}</Card.Header>
+            <Card.Description>
+              <Tab  panes={panes} />
+
+            </Card.Description>
+          </Card.Content>
+        </Card>
+      </Card.Group>
     );
   }
 }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Card, Icon, Image, Segment } from 'semantic-ui-react'
 
 export default class EnrichMediator extends Component {
 
@@ -17,16 +18,17 @@ export default class EnrichMediator extends Component {
       }
 
       return (
-        <div className="mediator mediator-enrich">
-          <div className="mediator-icon">
-            <img src={"/icons/enrich.svg"} alt="enrich" />
-            <div className="mediator-label">enrich</div>
-          </div>
-          <div>
-            <div className="mediator-enrich-source">{sourceAttributes}</div>
-            <div className="mediator-enrich-target">{targetAttributes}</div>
-          </div>
-        </div>
+        <Card.Group itemsPerRow={1}>
+          <Card raised='true' centered='true'>
+            <Image src='/icons/enrich.svg' centered='true' title={this.props.type} alt={this.props.type} />
+            <Card.Content>
+              <Card.Description>
+                <Segment>Источник {sourceAttributes}</Segment>
+                <Segment>Цель {targetAttributes}</Segment>
+              </Card.Description>
+            </Card.Content>
+          </Card>
+        </Card.Group>
       );
 
   }
