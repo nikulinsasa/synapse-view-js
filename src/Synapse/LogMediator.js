@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropertyMediator from './PropertyMediator'
 import { Card, Icon, Image } from 'semantic-ui-react'
+import DescriptionOfMediator from './DescriptionOfMediator'
 
 class LogMediator extends Component {
 
   render() {
-    console.log("LOG",this.props);
     var index=this.key+"_"+this.props.type;
     var level = "";
     if(typeof this.props.value.attributes.level !== "undefined"){
@@ -30,6 +30,9 @@ class LogMediator extends Component {
             <Card.Header>
                {level}
             </Card.Header>
+            <Card.Description>
+              <DescriptionOfMediator descriptionObject={this.props.value} />
+            </Card.Description>
             <Card.Description>
               {properties}
             </Card.Description>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Card, Icon, Image, Segment } from 'semantic-ui-react'
+import DescriptionOfMediator from './DescriptionOfMediator'
 
 export default class PayloadFactoryMediator extends Component {
   render() {
@@ -11,15 +12,19 @@ export default class PayloadFactoryMediator extends Component {
         listItems.push((<Segment>{typeof arg.attributes.expression==="undefined"?arg.attributes.expression.value.value:arg.attributes.expression.value}</Segment>));
     }
     var xmlFormat = this.props.value.getElementsByTagName("format")[0];
-    console.log("payload",xmlFormat);
+
     var format = xmlFormat.innerHTML.trim();
     return (
       <Card.Group itemsPerRow={1}>
         <Card raised='true' centered='true'>
           <Image src='/icons/payloadFactory.svg' centered='true' title={this.props.type} alt={this.props.type} />
+
           <Card.Content>
-            <Card.Header>{this.props.value.attributes["media-type"].value}</Card.Header>
+            <Card.Header>
+              {this.props.value.attributes["media-type"].value}
+            </Card.Header>
             <Card.Description>
+               <DescriptionOfMediator descriptionObject={this.props.value} />
                <pre>{format}</pre>
             </Card.Description>
             <Card.Description>

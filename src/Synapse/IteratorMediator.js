@@ -17,7 +17,7 @@ export default class IteratorMediator extends Component {
                    {value.attributes.expression.value}
                 </Card.Header>
                 <Card.Description>
-                  <Sequence key={_key} index={_key} name='sequence' type="iterator" sequences={sequence.children} />
+                  <Sequence displayMediator={this.props.displayMediator} key={_key} index={_key} name='sequence' type="iterator" sequences={sequence.children} />
                 </Card.Description>
               </Card.Content>
             </Card>

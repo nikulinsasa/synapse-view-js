@@ -16,7 +16,7 @@ export default class AggregateMediator extends Component {
                    {sequence.attributes.expression.value}
                 </Card.Header>
                 <Card.Description>
-                  <Sequence key={_key} index={_key} name='sequence' type="aggregator" sequences={sequence.children} />
+                  <Sequence displayMediator={this.props.displayMediator} key={_key} index={_key} name='sequence' type="aggregator" sequences={sequence.children} />
                 </Card.Description>
               </Card.Content>
             </Card>

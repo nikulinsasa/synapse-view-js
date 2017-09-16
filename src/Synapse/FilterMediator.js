@@ -37,14 +37,14 @@ export default class FilterMediator extends Component {
     var thenElement = this.props.value.querySelector("then");
     if(typeof thenElement!=="undefined"){
         var thenIndex = this.props.index+"_then";
-        _then = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="then" sequences={thenElement.children} />);
+        _then = (<Sequence displayMediator={this.props.displayMediator} key={thenIndex} index={thenIndex} name='sequence' type="then" sequences={thenElement.children} />);
     }
 
     var _else = "";
     var elseElement = this.props.value.querySelector("else");
     if(elseElement!==null){
         var thenIndex = this.props.index+"_ele";
-        _else = (<Sequence key={thenIndex} index={thenIndex} name='sequence' type="else" sequences={elseElement.children} />);
+        _else = (<Sequence displayMediator={this.props.displayMediator} key={thenIndex} index={thenIndex} name='sequence' type="else" sequences={elseElement.children} />);
     }
 
     var panes = [

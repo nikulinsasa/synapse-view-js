@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Sequence from './Sequence'
 import { Card, Icon, Image, Segment, Accordion, Label } from 'semantic-ui-react'
+import DescriptionOfMediator from './DescriptionOfMediator'
 
 class SwitchMediator extends Component {
   render() {
@@ -15,7 +16,7 @@ class SwitchMediator extends Component {
       {cases.item(i).attributes.regex.value}
     </Label></Accordion.Title>);
       elements.push(<Accordion.Content>
-        <Sequence key={_key} index={_key} name='sequence' type="switch" sequences={cases.item(i).children} />
+        <Sequence displayMediator={this.props.displayMediator} key={_key} index={_key} name='sequence' type="switch" sequences={cases.item(i).children} />
         </Accordion.Content>
       );
     }
@@ -26,6 +27,9 @@ class SwitchMediator extends Component {
           <Image src='/icons/filter.svg' centered='true' title={this.props.type} alt={this.props.type} />
           <Card.Content>
             <Card.Header>{this.props.value.attributes.source.value}</Card.Header>
+            <Card.Description>
+              <DescriptionOfMediator descriptionObject={this.props.value} />
+            </Card.Description>
             <Card.Description><Accordion>{elements}</Accordion></Card.Description>
           </Card.Content>
         </Card>

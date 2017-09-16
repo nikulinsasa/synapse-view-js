@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Icon, Image } from 'semantic-ui-react'
 import MediatorFactory from './MediatorFactory'
+import DescriptionOfMediator from './DescriptionOfMediator'
 
 class ProxyMediator extends Component {
   render() {
@@ -14,11 +15,11 @@ class ProxyMediator extends Component {
 
       if(_target.children[i].tagName === "inSequence"){
         key=this.props.index+"_in";
-       _mediatorElements.push(<MediatorFactory key={key} index={key} type="in" values={_target.children[i]} />);
+       _mediatorElements.push(<MediatorFactory displayMediator={this.props.displayMediator} key={key} index={key} type="in" values={_target.children[i]} />);
       }
       if(_target.children[i].tagName === "outSequence"){
         key=this.props.index+"_out";
-        _mediatorElements.push(<MediatorFactory key={key} index={key} type="out" values={_target.children[i]} />);
+        _mediatorElements.push(<MediatorFactory displayMediator={this.props.displayMediator} key={key} index={key} type="out" values={_target.children[i]} />);
       }
     }
     var name = _target.parentNode.attributes.name.value;
@@ -32,6 +33,9 @@ class ProxyMediator extends Component {
             <Card.Header>
                {name}
             </Card.Header>
+            <Card.Description>
+              <DescriptionOfMediator descriptionObject={this.props.value} />
+            </Card.Description>
             <Card.Description>
               {_mediatorElements}
             </Card.Description>
