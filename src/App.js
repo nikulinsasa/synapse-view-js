@@ -36,6 +36,7 @@ class App extends Component {
       _this.setState({text:<ListElements list={response.data.names} type="proxy" />});
     })
     .catch(function (error) {
+
       _this.setState({text:error.response.data});
       if(error.response.status===401){
         _this.setState({text:(<Login app={_this} />)});
@@ -46,11 +47,11 @@ class App extends Component {
   loadListSequencies() {
     var _this = this;
     var _axios = require('axios');
-    _axios.get("http://localhost:9998/element/list/sequence",{
+    _axios.get("http://localhost:9998/element/list/sequency",{
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
-      _this.setState({text:<ListElements list={response.data.names} type="sequence" />});
+      _this.setState({text:<ListElements list={response.data.names} type="sequency" />});
     })
     .catch(function (error) {
       _this.setState({text:error.response.data});
@@ -70,7 +71,6 @@ class App extends Component {
       _this.setState({text:<ShowElement xml={response.data} />});
     })
     .catch(function (error) {
-      console.log("ERROR",error);
       _this.setState({text:error.response.data});
       if(error.response.status===401){
         _this.setState({text:(<Login app={_this} />)});
@@ -85,12 +85,10 @@ class App extends Component {
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
-      console.log(response);
       window.history.pushState("", "", '/');
       _this.componentDidMount();
     })
     .catch(function (error) {
-      console.log("ERROR",typeof error.response);
 
       if(typeof error.response==="undefined"){
         _this.setState({text:(
@@ -139,7 +137,6 @@ class App extends Component {
   }
 
   handleItemClick(e, data){
-    console.log("HANDLER",e,data);
     location.href = '/'+data.name;
   }
 
@@ -165,7 +162,7 @@ class App extends Component {
                 </Menu.Item>
 
                 <Menu.Item name='sequence-list' active={activeItem === 'spam'} onClick={this.handleItemClick}>
-                  Список sequence
+                  Список sequency
                 </Menu.Item>
 
                 <Menu.Item name='endpoint' active={activeItem === 'updates'} onClick={this.handleItemClick}>
