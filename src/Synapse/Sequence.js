@@ -20,12 +20,17 @@ class Sequence extends Component {
     var _sequences = [];
     var _mediatorElements = [];
     var i=0;
-    var sequenceName = "";
+    var sequenceName = "Без названия";
 
     if(this.props.sequence!==undefined){
       _sequences = this.props.sequence.children;
       if(this.props.sequence.attributes!==undefined){
-        sequenceName = this.props.sequence.attributes.key.value;
+        if(this.props.sequence.attributes.key!==undefined){
+          sequenceName = this.props.sequence.attributes.key.value;
+        }
+        if(this.props.sequence.attributes.name!==undefined){
+          sequenceName = this.props.sequence.attributes.name.value;
+        }
       }
     }else if(this.props.sequences!==undefined) {
       _sequences = this.props.sequences;
@@ -37,7 +42,7 @@ class Sequence extends Component {
 
     if(sequenceName!==""){
       return (
-        <Card.Group itemsPerRow={1}>
+        <Card.Group itemsPerRow={1} className='mediator'>
           <Card raised='true' centered='true'>
             <Image src='/icons/sequence.svg' centered='true' title={this.props.type} alt={this.props.type} />
             <Card.Content>

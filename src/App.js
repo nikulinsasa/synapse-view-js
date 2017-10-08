@@ -44,6 +44,17 @@ class App extends Component {
     });
   }
 
+  errorAction(error) {
+    console.log("ERROR",error);
+    if(typeof error.response === "undefined"){
+      this.setState({text:"Произошла неожиданная ошибка"});
+    }
+    this.setState({text:error.response.data});
+    if(error.response.status===401){
+      this.setState({text:(<Login app={this} />)});
+    }
+  }
+
   loadListSequencies() {
     var _this = this;
     var _axios = require('axios');
@@ -54,10 +65,7 @@ class App extends Component {
       _this.setState({text:<ListElements list={response.data.names} type="sequency" />});
     })
     .catch(function (error) {
-      _this.setState({text:error.response.data});
-      if(error.response.status===401){
-        _this.setState({text:(<Login app={_this} />)});
-      }
+      _this.errorAction(error);
     });
   }
 
@@ -71,10 +79,7 @@ class App extends Component {
       _this.setState({text:<ShowElement xml={response.data} />});
     })
     .catch(function (error) {
-      _this.setState({text:error.response.data});
-      if(error.response.status===401){
-        _this.setState({text:(<Login app={_this} />)});
-      }
+      _this.errorAction(error);
     });
   }
 
