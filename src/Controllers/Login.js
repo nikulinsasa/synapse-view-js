@@ -22,7 +22,7 @@ class Login extends Component{
     var _this = this;
 
     var _axios = require('axios');
-    _axios.post("http://localhost:9998/auth",request).then(function(response){
+    _axios.post(process.env.REACT_APP_SERVER_HOST+"/auth",request).then(function(response){
       if(typeof response.data.token !== "undefinde"){
         setCookie("auth_token",response.data.token,{});
         setCookie("auth_refresh_token",response.data.refresh_token,{});

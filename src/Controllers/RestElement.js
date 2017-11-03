@@ -25,7 +25,7 @@ export default class ShowElement extends Component {
       var methodSend = null;
       _this.setState({ 'loading': true });
       if(id===null){
-        methodSend = _axios.post("http://localhost:9998/rest/example",{
+        methodSend = _axios.post(process.env.REACT_APP_SERVER_HOST+"/rest/example",{
           name: this.props.name,
           input_example: this.state.input_example,
           output_example: this.state.output_example
@@ -33,7 +33,7 @@ export default class ShowElement extends Component {
           headers:{ Authorization: getCookie("auth_token") }
         });
       }else{
-        methodSend = _axios.put("http://localhost:9998/rest/example/"+id,{
+        methodSend = _axios.put(process.env.REACT_APP_SERVER_HOST+"/rest/example/"+id,{
           input_example: this.state.input_example,
           output_example: this.state.output_example
         },{
@@ -58,7 +58,7 @@ export default class ShowElement extends Component {
       this.setState({ 'modalOpen': true });
       _this.setState({ 'loading': true });
       var _axios = require('axios');
-      _axios.get("http://localhost:9998/rest/example?name="+this.props.name,{
+      _axios.get(process.env.REACT_APP_SERVER_HOST+"/rest/example?name="+this.props.name,{
         headers:{ Authorization: getCookie("auth_token") }
       })
       .then(function (response) {

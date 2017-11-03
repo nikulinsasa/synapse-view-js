@@ -29,7 +29,7 @@ class App extends Component {
   loadListProxy() {
     var _this = this;
     var _axios = require('axios');
-    _axios.get("http://localhost:9998/element/list/proxy",{
+    _axios.get(process.env.REACT_APP_SERVER_HOST+"/element/list/proxy",{
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
@@ -58,7 +58,7 @@ class App extends Component {
   loadListSequencies() {
     var _this = this;
     var _axios = require('axios');
-    _axios.get("http://localhost:9998/element/list/sequency",{
+    _axios.get(process.env.REACT_APP_SERVER_HOST+"/element/list/sequency",{
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
@@ -72,7 +72,7 @@ class App extends Component {
   loadSynapseElement(element) {
     var _this = this;
     var _axios = require('axios');
-    _axios.get("http://localhost:9998/element/"+element,{
+    _axios.get(process.env.REACT_APP_SERVER_HOST+"/element/"+element,{
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
@@ -86,7 +86,7 @@ class App extends Component {
   proxyUpdate() {
     var _this = this;
     var _axios = require('axios');
-    _axios.get("http://localhost:9998/service/update-proxy",{
+    _axios.get(process.env.REACT_APP_SERVER_HOST+"/service/update-proxy",{
       headers:{ Authorization: getCookie("auth_token") }
     })
     .then(function (response) {
@@ -129,8 +129,8 @@ class App extends Component {
       this.loadListProxy();
     }else if(window.location.pathname==="/sequence-list"){
       this.loadListSequencies();
-    }else if(/^\/element\/[0-9A-Za-z_]+$/.test(pathname)){
-      this.loadSynapseElement(pathname.replace("\/element\/",""));
+    }else if(/^\/html\/element\/[0-9A-Za-z_]+$/.test(pathname)){
+      this.loadSynapseElement(pathname.replace("\/html\/element\/",""));
       // console.log();
     }else if(pathname==="/logout"){
       deleteCookie("auth_token");
